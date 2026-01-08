@@ -16,6 +16,8 @@ export function buildEventDetailView(event: AppEvent): EventDetailView {
     kindLabel: event.type.kind,
     dateText: getEventDateText(event)
   }
+  if (event.venue !== undefined) view.venue = event.venue
+  if (event.location !== undefined) view.location = event.location
   if (event.section !== undefined) view.section = event.section
   if (event.seat !== undefined) view.seat = event.seat
   if (event.row !== undefined) view.row = event.row

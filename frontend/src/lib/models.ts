@@ -18,6 +18,8 @@ export type AppEvent = {
   type: EventType
   name: string
   date?: string
+  venue?: string
+  location?: string
   section?: number | string
   row?: number | string
   seat?: number | string
@@ -29,6 +31,8 @@ export type EventDetailView = {
   name: string
   kindLabel: string
   dateText: string
+  venue?: string
+  location?: string
   section?: number | string
   seat?: number | string
   row?: number | string

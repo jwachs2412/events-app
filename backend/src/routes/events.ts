@@ -19,6 +19,8 @@ export type AppEvent = {
   type: EventType
   name: string
   date?: string
+  venue?: string
+  location?: string
   section?: number | string
   row?: number | string
   seat?: number | string
@@ -50,6 +52,8 @@ function mapEventToDbRow(event: NewEventInput) {
     date,
     start_date,
     end_date,
+    venue: event.venue ?? null,
+    location: event.location ?? null,
     section_value: event.section ?? null,
     row_value: event.row ?? null,
     seat_value: event.seat ?? null,
@@ -71,6 +75,8 @@ router.get("/", async (req, res) => {
         name: row.name,
         type,
         date: row.date,
+        venue: row.venue,
+        location: row.location,
         section: row.section_value,
         row: row.row_value,
         seat: row.seat_value,
@@ -101,6 +107,8 @@ router.get("/:id", async (req, res) => {
       name: row.name,
       type,
       date: row.date,
+      venue: row.venue,
+      location: row.location,
       section: row.section_value,
       row: row.row_value,
       seat: row.seat_value,
@@ -123,9 +131,9 @@ router.post("/", async (req, res) => {
     const dbRow = mapEventToDbRow(event)
 
     const result: any = await db.query(
-      `INSERT INTO events (name, kind, date, start_date, end_date, section_value, row_value, seat_value, notes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes]
+      `INSERT INTO events (name, kind, date, start_date, end_date, venue, location, section_value, row_value, seat_value, notes)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes]
     )
 
     const insertedEvent: AppEvent = {
@@ -133,6 +141,8 @@ router.post("/", async (req, res) => {
       name: event.name,
       type: event.type,
       date: event.date,
+      venue: event.venue,
+      location: event.location,
       section: event.section,
       row: event.row,
       seat: event.seat,
@@ -157,9 +167,9 @@ router.put("/:id", async (req, res) => {
 
     await db.query(
       `UPDATE events
-       SET name=?, kind=?, date=?, start_date=?, end_date=?, section_value=?, row_value=?, seat_value=?, notes=?
+       SET name=?, kind=?, date=?, start_date=?, end_date=?, venue=?, location=?,section_value=?, row_value=?, seat_value=?, notes=?
        WHERE id=?`,
-      [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes, id]
+      [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes, id]
     )
 
     const updatedEvent: AppEvent = {
@@ -167,6 +177,8 @@ router.put("/:id", async (req, res) => {
       name: event.name,
       type: event.type,
       date: event.date,
+      venue: event.venue,
+      location: event.location,
       section: event.section,
       row: event.row,
       seat: event.seat,

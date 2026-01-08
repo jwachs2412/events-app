@@ -76,6 +76,8 @@ export const App: React.FC = () => {
             <th onClick={() => handleSort("name")}>Name</th>
             <th onClick={() => handleSort("kindLabel")}>Type</th>
             <th onClick={() => handleSort("dateText")}>Date</th>
+            <th>Venue</th>
+            <th>City/State/Country</th>
             <th>Section</th>
             <th>Row</th>
             <th>Seat</th>
@@ -89,6 +91,8 @@ export const App: React.FC = () => {
               <td>{e.name}</td>
               <td>{e.kindLabel}</td>
               <td>{e.dateText}</td>
+              <td>{e.venue}</td>
+              <td>{e.location}</td>
               <td>{e.section}</td>
               <td>{e.row}</td>
               <td>{e.seat}</td>

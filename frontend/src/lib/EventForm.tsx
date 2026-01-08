@@ -15,6 +15,8 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
   const [date, setDate] = useState(formatForInputDate(event?.date))
   const [startDate, setStartDate] = useState(event?.type.kind === EventKind.Festival ? formatForInputDate(event.type.dateRange[0]) : "")
   const [endDate, setEndDate] = useState(event?.type.kind === EventKind.Festival ? formatForInputDate(event.type.dateRange[1]) : "")
+  const [venue, setVenue] = useState(event?.venue ?? "")
+  const [location, setLocation] = useState(event?.location ?? "")
   const [section, setSection] = useState(event?.section ?? "")
   const [row, setRow] = useState(event?.row ?? "")
   const [seat, setSeat] = useState(event?.seat ?? "")
@@ -35,6 +37,8 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
         name,
         type,
         date: isFestival ? undefined : date,
+        venue,
+        location,
         section,
         row,
         seat,
@@ -95,6 +99,16 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
             <input type="date" value={date} onChange={e => setDate(e.target.value)} />
           </label>
         )}
+
+        <label>
+          Venue:
+          <input value={venue} onChange={e => setVenue(e.target.value)} />
+        </label>
+
+        <label>
+          Location:
+          <input value={location} onChange={e => setLocation(e.target.value)} />
+        </label>
 
         <label>
           Section:
