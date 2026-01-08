@@ -132,7 +132,7 @@ router.post("/", async (req, res) => {
 
     const result: any = await db.query(
       `INSERT INTO events (name, kind, date, start_date, end_date, venue, location, section_value, row_value, seat_value, notes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes]
     )
 
@@ -167,7 +167,7 @@ router.put("/:id", async (req, res) => {
 
     await db.query(
       `UPDATE events
-       SET name=?, kind=?, date=?, start_date=?, end_date=?, venue=?, location=?,section_value=?, row_value=?, seat_value=?, notes=?
+       SET name=?, kind=?, date=?, start_date=?, end_date=?, venue=?, location=?, section_value=?, row_value=?, seat_value=?, notes=?
        WHERE id=?`,
       [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes, id]
     )
