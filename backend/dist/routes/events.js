@@ -106,7 +106,7 @@ router.post("/", async (req, res) => {
         const event = req.body;
         const dbRow = mapEventToDbRow(event);
         const result = await db.query(`INSERT INTO events (name, kind, date, start_date, end_date, venue, location, section_value, row_value, seat_value, notes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes]);
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes]);
         const insertedEvent = {
             id: result[0].insertId,
             name: event.name,
@@ -135,7 +135,7 @@ router.put("/:id", async (req, res) => {
         const event = req.body;
         const dbRow = mapEventToDbRow(event);
         await db.query(`UPDATE events
-       SET name=?, kind=?, date=?, start_date=?, end_date=?, venue=?, location=?,section_value=?, row_value=?, seat_value=?, notes=?
+       SET name=?, kind=?, date=?, start_date=?, end_date=?, venue=?, location=?, section_value=?, row_value=?, seat_value=?, notes=?
        WHERE id=?`, [dbRow.name, dbRow.kind, dbRow.date, dbRow.start_date, dbRow.end_date, dbRow.venue, dbRow.location, dbRow.section_value, dbRow.row_value, dbRow.seat_value, dbRow.notes, id]);
         const updatedEvent = {
             id: Number(id),

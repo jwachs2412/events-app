@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { createPortal } from "react-dom"
 import { AppEvent, EventKind, EventType, NewEventInput } from "./models"
 import { formatForInputDate } from "./viewModels"
 import * as api from "./api"
@@ -27,11 +28,8 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
   const handleSave = async () => {
     try {
       let type: EventType
-      if (isFestival) {
-        type = { kind, dateRange: [startDate, endDate] }
-      } else {
-        type = { kind }
-      }
+      if (isFestival) type = { kind, dateRange: [startDate, endDate] }
+      else type = { kind }
 
       const newEvent: NewEventInput = {
         name,
@@ -45,27 +43,20 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
         notes
       }
 
-      if (event) {
-        const result = await api.editEvent(event.id, newEvent)
-        if (result.ok) onSave(result.data)
-        else alert(result.error)
-      } else {
-        const result = await api.addEvent(newEvent)
-        if (result.ok) onSave(result.data)
-        else alert(result.error)
-      }
+      const result = event ? await api.editEvent(event.id, newEvent) : await api.addEvent(newEvent)
 
-      onClose()
+      if (result.ok) onSave(result.data)
+      else alert(result.error)
     } catch (err) {
       alert((err as Error).message)
     }
   }
 
-  return (
-    <div className="modal-backdrop">
-      <div className="modal">
+  // Modal JSX
+  const modalContent = (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
         <h2>{event ? "Edit Event" : "Add Event"}</h2>
-
         <label>
           Name:
           <input value={name} onChange={e => setName(e.target.value)} />
@@ -129,7 +120,6 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
           Notes:
           <textarea value={notes} onChange={e => setNotes(e.target.value)} />
         </label>
-
         <div className="modal-buttons">
           <button onClick={handleSave}>{event ? "Save" : "Add"}</button>
           <button onClick={onClose}>Cancel</button>
@@ -137,4 +127,7 @@ export const EventForm: React.FC<EventFormProps> = ({ event, onClose, onSave }) 
       </div>
     </div>
   )
+
+  // Render in portal
+  return createPortal(modalContent, document.getElementById("modal-root")!)
 }
