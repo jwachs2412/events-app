@@ -98,8 +98,12 @@ export const App: React.FC = () => {
               <td>{e.seat}</td>
               <td>{e.notes}</td>
               <td>
-                <button onClick={() => openEditModal(appEvents.find(ev => ev.id === e.id)!)}>Edit</button>
-                <button onClick={() => handleDelete(e.id)}>Delete</button>
+                <button className="action-btn" onClick={() => openEditModal(appEvents.find(ev => ev.id === e.id)!)}>
+                  Edit
+                </button>
+                <button className="action-btn" onClick={() => handleDelete(e.id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

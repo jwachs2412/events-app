@@ -27,7 +27,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -47,13 +47,23 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+  &:hover {
+    border-color: #646cff;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  &.action-btn {
+    min-width: 5.5rem;
+
+    &:first-of-type {
+      margin-right: 0.5rem;
+    }
+  }
 }
 
 .modal-backdrop {
@@ -88,5 +98,6 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+    border: 1px solid #000;
   }
 }
