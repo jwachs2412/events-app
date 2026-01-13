@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  font-family: "Roboto", sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -20,51 +20,149 @@ a {
   color: #646cff;
   text-decoration: inherit;
 
-  &:hover, &:focus-within {
+  &:hover,
+  &:focus-within {
     color: #535bf2;
   }
 }
 
 body {
+  display: block;
   margin: 0;
-  display: flex;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  text-align: center;
-  text-decoration: underline;
-}
+.events-container {
+  background: #f8fafc;
+  border-radius: 1.125rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  margin-block: 2rem;
+  margin-inline: auto;
+  max-inline-size: 75rem;
+  padding: 1.5rem;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-
-  &:hover {
-    border-color: #646cff;
+  h1 {
+    color: #111827;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-block-end: 1rem;
   }
 
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+  table {
+    background: #fff;
+    border-collapse: collapse;
+    border-radius: 0.875rem;
+    inline-size: 100%;
+    overflow: hidden;
+
+    thead {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #fff;
+
+      th {
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        padding-block: 0.85rem;
+        padding-inline: 0.75rem;
+        text-align: left;
+        text-transform: uppercase;
+        white-space: nowrap;
+        user-select: none;
+
+        &:hover {
+          text-decoration: underline;
+          opacity: 0.9;
+        }
+
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-block-end: 1px solid #e5e7eb;
+        transition: background 0.15s ease, transform 0.15s ease;
+
+        &:nth-child(even) {
+          background: #f9fafb;
+        }
+
+        &:hover {
+          background: #eef2ff;
+          transform: scale(1.002);
+        }
+      }
+
+      td {
+        font-size: 0.9rem;
+        padding-block: 0.75rem;
+        padding-inline: 0.65rem;
+
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
   }
 
-  &.action-btn {
-    min-width: 5.5rem;
+  &__action-btn-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
 
-    &:first-of-type {
-      margin-right: 0.5rem;
+  // Action buttons inside table
+  &__action-btn {
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    inline-size: 4.375rem;
+    margin-block: 0;
+    margin-inline: 0.25rem;
+    padding-block: 0.4rem;
+    padding-inline: 0.75rem;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
+    }
+
+    &--edit {
+      background: #e0e7ff;
+      color: #3730a3;
+      margin-block-end: 0.313rem;
+    }
+
+    &--delete {
+      background: #fee2e2;
+      color: #7f1d1d;
+    }
+  }
+
+  // Add Event button
+  > button {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    margin-block-start: 1.25rem;
+    padding-block: 0.6rem;
+    padding-inline: 1.2rem;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+
+    &:hover {
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.25);
+      transform: translateY(-1px);
     }
   }
 }

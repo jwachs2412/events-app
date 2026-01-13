@@ -68,7 +68,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="events-container">
       <h1>My Events</h1>
       <table>
         <thead>
@@ -97,11 +97,11 @@ export const App: React.FC = () => {
               <td>{e.row}</td>
               <td>{e.seat}</td>
               <td>{e.notes}</td>
-              <td>
-                <button className="action-btn" onClick={() => openEditModal(appEvents.find(ev => ev.id === e.id)!)}>
+              <td className="events-container__action-btn-wrapper">
+                <button className="events-container__action-btn events-container__action-btn--edit" onClick={() => openEditModal(appEvents.find(ev => ev.id === e.id)!)}>
                   Edit
                 </button>
-                <button className="action-btn" onClick={() => handleDelete(e.id)}>
+                <button className="events-container__action-btn events-container__action-btn--delete" onClick={() => handleDelete(e.id)}>
                   Delete
                 </button>
               </td>
