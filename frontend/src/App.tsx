@@ -88,15 +88,15 @@ export const App: React.FC = () => {
         <tbody>
           {sortedEvents.map(e => (
             <tr key={e.id}>
-              <td>{e.name}</td>
-              <td>{e.kindLabel}</td>
-              <td>{e.dateText}</td>
-              <td>{e.venue}</td>
-              <td>{e.location}</td>
-              <td>{e.section}</td>
-              <td>{e.row}</td>
-              <td>{e.seat}</td>
-              <td>{e.notes}</td>
+              <td data-label="Name">{e.name}</td>
+              <td data-label="Type">{e.kindLabel}</td>
+              <td data-label="Date">{e.dateText}</td>
+              <td data-label="Venue">{e.venue}</td>
+              <td data-label="City/State/Country">{e.location}</td>
+              <td data-label="Section">{e.section}</td>
+              <td data-label="Row">{e.row}</td>
+              <td data-label="Seat">{e.seat}</td>
+              <td data-label="Notes">{e.notes}</td>
               <td className="events-container__action-btn-wrapper">
                 <button className="events-container__action-btn events-container__action-btn--edit" onClick={() => openEditModal(appEvents.find(ev => ev.id === e.id)!)}>
                   Edit
