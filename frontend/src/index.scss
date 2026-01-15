@@ -183,7 +183,7 @@ body {
 // ---------- RESPONSIVE TABLE ----------
 
 // tablet: shrink padding, font, allow horizontal scroll if needed
-@media (max-width: 1024px) {
+@media (max-width: $large-breakpoint) {
   .events-container {
     overflow-x: auto;
 
@@ -200,7 +200,7 @@ body {
 }
 
 // ---------- MOBILE CARD MODE ----------
-@media (max-width: 760px) {
+@media (max-width: $medium-breakpoint) {
   .events-container {
     table,
     thead,
@@ -257,7 +257,7 @@ body {
     }
 
     &__action-btn {
-      inline-size: auto;
+      inline-size: 4.375rem;
       padding-inline: 0.9rem;
     }
   }
